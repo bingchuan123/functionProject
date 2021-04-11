@@ -13,13 +13,23 @@ with open("xxxx.txt", mode='rb') as file_object:
 
 # 1、补充代码：实现下载视频并保存到本地
 import requests
+import os
 
+file_path = os.path.abspath(__file__)
 res = requests.get(
-    url="http://f.video.weibocdn.com/0vpw83cslx07LNW8chS801041200gc4q0E010.mp4?label=mp4_ld&template=624x360.25.0&trans_finger=40a32e8439c5409a63ccf853562a60ef&ori=0&ps=1EO8O2oFB1ePdo&Expires=1618155997&ssig=%2FKSmAyrBgf&KID=unistore,video",
+    url="http://f.video.weibocdn.com/xt0RE01Klx07LO9MEyNW01041202l1Hj0E010.mp4?label=mp4_720p&template=720x1280.24.0"
+        "&trans_finger=c3f00996be5378650057cf237d7bfffd&media_id=4624885536981026&tp=8x8A3El:YTkl0eM8&us=0&ori=1&bf=4"
+        "&ot=v&lp=00002KCE4n&ps=4pdsh0&uid=3ZoTIp&ab=,1493-g0,1192-g0,1191-g0,"
+        "1258-g0&Expires=1618157721&ssig=WUaCT31R9Y&KID=unistore,video",
     headers={
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                      "Chrome/86.0.4240.198 Safari/537.36 "
     }
 )
 
-with open("huke.mp4", mode="rb") as video:
+file_path = os.path.dirname(file_path)
+print(file_path)
+
+# with open(r"files\huke.mp4"), mode="wb") as video:
+with open(os.path.join(file_path, "files", "huke.mp4"), mode="wb") as video:
     video.write(res.content)
