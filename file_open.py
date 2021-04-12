@@ -1,6 +1,11 @@
 # Author:Glaciers
 # -*- coding.utf-8 -*-
 
+import os
+
+file_path = os.path.abspath(__file__)
+file_path = os.path.dirname(file_path)
+
 # 上下文管理
 """
 之前对文件进行操作时，每次都要打开和关闭文件，比较繁琐且容易忘记关闭文件。
@@ -12,6 +17,8 @@ with open("xxxx.txt", mode='rb') as file_object:
 """
 
 # 1、补充代码：实现下载视频并保存到本地
+"""
+
 import requests
 import os
 
@@ -33,3 +40,36 @@ print(file_path)
 # with open(r"files\huke.mp4"), mode="wb") as video:
 with open(os.path.join(file_path, "files", "huke.mp4"), mode="wb") as video:
     video.write(res.content)
+"""
+
+# 2、日志分析，计算某用户`223.73.89.192`访问次数。日志文件如下：`access.log`
+"""
+ip = "223.73.89.192"
+count = 0
+
+# "r":读一个字符；"rb":读一个字节。
+with open(os.path.join(file_path, "files", "access.log"), mode="r", encoding="utf-8") as file_ip:
+    for line in file_ip:
+        if line.startswith(ip):
+            count += 1
+print("访问次数为:{}".format(count))
+"""
+
+# 3、日志分析升级，计算所有用户的访问次数。
+
+# 定义一个空字典，准备写入数据
+user_dict = {}
+
+# 循环每一行，取前面的IP字段，进行计数统计
+with open(os.path.join(file_path, "files", "access.log"), mode="r", encoding="utf-8") as file_ip:
+    # 循环每一行数据
+    for line in file_ip:
+        # 取所有的IP字段,每行的第0个索引
+        user_ip = line.split(" ")[0]
+        # 判断用户IP是否存在于字典中，如果不存在，则开始计数为初始值：1
+        if user_ip not in user_dict:
+            user_dict[user_ip] = 1
+        # 否则用户IP存在于字典中，则开始计数为已计数值+1
+        else:
+            user_dict[user_ip] += 1
+print(user_dict)
