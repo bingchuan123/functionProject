@@ -2,6 +2,7 @@
 # -*- coding.utf-8 -*-
 
 import os
+import shutil
 
 file_path = os.path.abspath(__file__)
 file_path = os.path.dirname(file_path)
@@ -76,6 +77,7 @@ print(user_dict)
 """
 
 # 4、筛选出股票 当前价大于 20 的所有股票数据
+"""
 # 打开文件
 with open(os.path.join(file_path, "files", "shares.txt"), mode="r", encoding="utf-8") as file:
     # 去掉第一行无用的数据
@@ -86,3 +88,15 @@ with open(os.path.join(file_path, "files", "shares.txt"), mode="r", encoding="ut
         if float(line.split(",")[2]) > 20:
             # 输出条件筛选出的结果，并去掉空格换行符内容
             print(line.strip())
+"""
+
+# 5、根据要求修改文件的内容，原文件内容如下：`ha.conf`
+# 请将文件中的 `luffycity`修改为 `pythonav` 。
+# 打开文件，并打开一个新的文件存储
+with open(os.path.join(file_path, "files", "ha.conf"), mode="r", encoding="utf-8") as file,\
+        open(os.path.join(file_path, "files", "ha1.conf"), mode="w", encoding="utf-8") as file1:
+    for line in file:
+        new_line = line.replace("luffycity", "pythonav")
+        file1.write(new_line)
+# 重命名文件为xxx，如果存在相同文件名文件，则覆盖保存
+shutil.move(os.path.join(file_path, "files", "ha1.conf"), os.path.join(file_path, "files", "ha.conf"))
