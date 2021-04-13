@@ -55,8 +55,8 @@ with open(os.path.join(file_path, "files", "access.log"), mode="r", encoding="ut
 print("访问次数为:{}".format(count))
 """
 
-# 3、日志分析升级，计算所有用户的访问次数。
-
+# 3、日志分析升级，计算所有用户的访问次数
+"""
 # 定义一个空字典，准备写入数据
 user_dict = {}
 
@@ -73,3 +73,16 @@ with open(os.path.join(file_path, "files", "access.log"), mode="r", encoding="ut
         else:
             user_dict[user_ip] += 1
 print(user_dict)
+"""
+
+# 4、筛选出股票 当前价大于 20 的所有股票数据
+# 打开文件
+with open(os.path.join(file_path, "files", "shares.txt"), mode="r", encoding="utf-8") as file:
+    # 去掉第一行无用的数据
+    file.readline()
+    # 循环所有行的数据
+    for line in file:
+        # 将小鼠字符串转换为浮点型，并与整数int进行比较
+        if float(line.split(",")[2]) > 20:
+            # 输出条件筛选出的结果，并去掉空格换行符内容
+            print(line.strip())
