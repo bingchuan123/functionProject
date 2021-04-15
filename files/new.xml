@@ -1,0 +1,16 @@
+<data>
+    <country name="Liechtenstein">
+        <rank update="2020-11-11">999</rank>
+        <year>2023</year>
+        <gdppc>141100</gdppc>
+        <neighbor direction="E" name="Austria" />
+        <neighbor direction="W" name="Switzerland" />
+    </country>
+     <country name="Panama">
+        <rank>69</rank>
+        <year>2026</year>
+        <gdppc>13600</gdppc>
+        <neighbor direction="W" name="Costa Rica" />
+        <neighbor direction="E" name="Colombia" />
+    </country>
+</data>
